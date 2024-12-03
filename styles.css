@@ -1,0 +1,223 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Sour Gummy", sans-serif;
+}
+
+:root {
+  --color1: #647c90;
+  --color2: #e2ded0;
+  --color3: #4e4f50;
+  --color4: #746c70;
+}
+
+/* Body */
+body {
+  background-color: var(--color1);
+  color: var(--color2);
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Header */
+h1 {
+  font-size: clamp(
+    1.8rem,
+    5vw,
+    3rem
+  ); /* Minimum: 1.8rem, Scales with 5vw, Maximum: 3rem */
+  margin-bottom: 0.5rem;
+}
+h2 {
+  font-size: clamp(
+    1rem,
+    3vw,
+    1.5rem
+  ); /* Minimum: 1rem, Scales with 3vw, Maximum: 1.5rem */
+  margin-bottom: 2rem;
+}
+
+header {
+  margin-bottom: 1.5rem;
+}
+
+/* Main Section */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+  width: 75%;
+  margin-bottom: 2rem;
+}
+
+/* Change-due section */
+#change-due {
+  border: 0.18rem dotted var(--color3);
+  padding: 1rem;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 40%;
+  text-align: left;
+  background-color: var(--color2);
+  color: var(--color3);
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#change-due p {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Cash register parent container */
+.container {
+  border: 3px solid var(--color3);
+  border-radius: 5px;
+  background-color: var(--color2);
+  padding: 1rem;
+  width: 100%;
+  max-width: 50%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Total cost display screen */
+.total-cost-screen-container {
+  background-color: var(--color3);
+  color: var(--color2);
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 3px solid var(--color3);
+}
+
+.total-cost {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  font-weight: 600;
+}
+
+/* Cash box section */
+.cash-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: var(--color2);
+  border-top: 3px solid var(--color3);
+  padding: 1rem;
+  border-radius: 0 0 8px 8px;
+}
+
+label {
+  color: var(--color3);
+}
+
+.cash-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.cash-input {
+  border-radius: 0.3rem;
+  border: none;
+  background-color: var(--color3);
+  height: 2rem;
+  width: 100%;
+  max-width: 8rem;
+  text-align: center;
+  outline: none;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: var(--color2);
+  margin-bottom: 0.5rem;
+}
+
+button {
+  padding: 5px 10px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color3);
+  color: var(--color2);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--color4);
+}
+
+/* Cash drawer */
+.change-in-drawer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-top: 5px solid var(--color3);
+}
+
+.change-in-drawer li {
+  list-style: none;
+  margin: 0.1rem 0;
+  font-size: 0.9rem;
+  color: var(--color3);
+}
+
+/* Drawer bottom section */
+.drawer-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background-color: var(--color3);
+  border-radius: 0 0 8px 8px;
+  /* margin-top: 1rem; */
+  box-shadow: inset 0px -2px 4px rgba(0, 0, 0, 0.2);
+}
+.handle {
+  width: 25px;
+  height: 5px;
+  background-color: var(--color4);
+  border-radius: 2px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #change-due,
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    width: 100%;
+  }
+}
+
+@media (max-width: 255px) {
+  body {
+    word-break: break-word;
+  }
+}
