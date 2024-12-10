@@ -101,7 +101,7 @@ const calculateChange = (change, cid) => {
       changeArray.push([denom, amount]);
     }
 
-    cid[i][1] = amountInDrawer;
+    cid[i][1] = Math.max(0, amountInDrawer); // Ensure no negative values;
   }
 
   if (change > 0) {
@@ -118,7 +118,7 @@ const updateChangeInDrawer = () => {
   changeInDrawer.innerHTML = "";
   cid.forEach(([denom, amount]) => {
     const li = document.createElement("li");
-    li.textContent = `${denom}: $${amount.toFixed(2)}`;
+    li.textContent = `${denom}: $${Math.max(0, amount).toFixed(2)}`;
     changeInDrawer.appendChild(li);
   });
 };
