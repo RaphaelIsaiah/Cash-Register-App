@@ -1,9 +1,9 @@
 // DOM ELEMENT SELECTION
-const changeDue = document.getElementById("change-due"); // Section to display the change due
-const totalCost = document.getElementById("total-cost"); // Placeholder for total cost
-const purchaseBtn = document.getElementById("purchase-btn"); // Button to evaluate the transaction
-const changeInDrawer = document.getElementById("change-in-drawer"); // Section to display current cash in drawer
-const cash = document.getElementById("cash"); // Input field for cash provided by customer
+const changeDue = document.getElementById("change-due");
+const totalCost = document.getElementById("total-cost");
+const purchaseBtn = document.getElementById("purchase-btn");
+const changeInDrawer = document.getElementById("change-in-drawer");
+const cash = document.getElementById("cash");
 
 // Default values for the price and cash in drawer (cid)
 let price = 3.55;
@@ -73,7 +73,7 @@ const calculateChange = (change, cid) => {
   }
 
   if (parseFloat(change.toFixed(2)) === totalInDrawer) {
-    // Provide only the change required, not the entire drawer
+    // Provide only the change required
     let remainingChange = change;
     let closedChange = [];
 
