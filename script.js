@@ -25,6 +25,28 @@ totalCost.textContent = price;
 changeDue.style.display = "none";
 
 /**
+ * Function to dynamically update the "change-in-drawer" section
+ */
+const updateChangeInDrawer = () => {
+  changeInDrawer.innerHTML = "";
+  cid.forEach(([denom, amount]) => {
+    const li = document.createElement("li");
+    li.textContent = `${denom}: $${Math.max(0, amount).toFixed(2)}`;
+    changeInDrawer.appendChild(li);
+  });
+};
+
+/**
+ * Function to format the change array
+ * @param {Array} changeArray - Array of change in denominations
+ * @returns {string} - HTML string of formatted change
+ */
+const formatChange = (changeArray) =>
+  changeArray
+    .map(([denom, amount]) => `<p>${denom}: $${amount.toFixed(2)}</p>`)
+    .join("");
+
+/**
  * Function to calculate change based on cash-in-drawer (cid)
  * @param {number} change - The amount of change required
  * @param {Array} cid - Cash-in-drawer array with denominations and amounts
@@ -43,10 +65,7 @@ const calculateChange = (change, cid) => {
     ["ONE HUNDRED", 100],
   ];
 
-  let totalInDrawer = 0;
-  let changeArray = [];
-
-  cid.forEach(([_, amount]) => (totalInDrawer += amount));
+  let totalInDrawer = cid.reduce((sum, [_, amount]) => sum + amount, 0);
   totalInDrawer = parseFloat(totalInDrawer.toFixed(2));
 
   if (change > totalInDrawer) {
@@ -85,6 +104,8 @@ const calculateChange = (change, cid) => {
     return { status: "CLOSED", change: closedChange };
   }
 
+  let changeArray = [];
+
   for (let i = currencyUnits.length - 1; i >= 0; i--) {
     const [denom, unitValue] = currencyUnits[i];
     let amountInDrawer = cid[i][1];
@@ -109,18 +130,6 @@ const calculateChange = (change, cid) => {
   }
 
   return { status: "OPEN", change: changeArray };
-};
-
-/**
- * Function to dynamically update the "change-in-drawer" section
- */
-const updateChangeInDrawer = () => {
-  changeInDrawer.innerHTML = "";
-  cid.forEach(([denom, amount]) => {
-    const li = document.createElement("li");
-    li.textContent = `${denom}: $${Math.max(0, amount).toFixed(2)}`;
-    changeInDrawer.appendChild(li);
-  });
 };
 
 /**
@@ -157,19 +166,20 @@ const evaluateChange = () => {
     changeDue.innerHTML = `<p>Status: ${result.status}</p>`;
   } else if (result.status === "CLOSED") {
     changeDue.style.display = "block";
-    changeDue.innerHTML = `<p>Status: ${result.status}</p>${result.change
-      .map(([denom, amount]) => `<p>${denom}: $${amount.toFixed(2)}</p>`)
-      .join("")}`;
+    changeDue.innerHTML = `<p>Status: ${result.status}</p>${formatChange(
+      result.change
+    )}`;
   } else if (result.status === "OPEN") {
     changeDue.style.display = "block";
-    changeDue.innerHTML = `<p>Status: ${result.status}</p>${result.change
-      .map(([denom, amount]) => `<p>${denom}: $${amount.toFixed(2)}</p>`)
-      .join("")}`;
+    changeDue.innerHTML = `<p>Status: ${result.status}</p>${formatChange(
+      result.change
+    )}`;
   }
 
   updateChangeInDrawer();
 };
 
+// Event Listeners
 purchaseBtn.addEventListener("click", evaluateChange);
 cash.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
@@ -177,4 +187,5 @@ cash.addEventListener("keydown", (e) => {
   }
 });
 
+// Initial UI update
 updateChangeInDrawer();
